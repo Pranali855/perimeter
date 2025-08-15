@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rectangle Perimeter Calculator</title>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: #fff;
+    }
+
+    .container {
+        background: #ff9ac1;
+        color: #333;
+        padding: 25px;
+        border: 2px solid #f5307c;
+        border-radius: 10px;
+        box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+        width: 90%;
+        max-width: 400px;
+        text-align: center;
+        animation: fadeIn 1.2s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        0% { opacity: 0; transform: translateY(-30px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+        margin-bottom: 20px;
+        color: #fff;
+    }
+
+    input {
+        width: 85%;
+        padding: 12px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 16px;
+        transition: 0.3s;
+    }
+
+    input:focus {
+        border-color: #2575fc;
+        outline: none;
+        box-shadow: 0 0 10px rgba(37,117,252,0.4);
+    }
+
+    .btn-container {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 15px;
+    }
+
+    button {
+        background: #2575fc;
+        color: #fff;
+        padding: 12px 18px;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        background: #0cc1f8;
+        transform: scale(1.05);
+    }
+
+    .clear-btn {
+        background: #f81f0f;
+    }
+
+    .clear-btn:hover {
+        background: #d32f2f;
+    }
+
+    .result {
+        margin-top: 20px;
+        font-size: 20px;
+        font-weight: bold;
+        color: #222;
+        opacity: 0;
+        transform: scale(0.8);
+        transition: all 0.4s ease-in-out;
+    }
+
+    .show {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 500px) {
+        .container {
+            width: 95%;
+            padding: 20px;
+        }
+        .btn-container {
+            flex-direction: flex;
+        }
+        button {
+            width: 40%;
+            margin-bottom: 10px;
+        }
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Rectangle Perimeter Calculator</h2>
+    <input type="number" id="length" placeholder="Enter Length">
+    <input type="number" id="breadth" placeholder="Enter Breadth">
+    
+    <div class="btn-container">
+        <button onclick="calculatePerimeter()">Calculate</button>
+        <button class="clear-btn" onclick="clearFields()">Clear</button>
+    </div>
+    
+    <div class="result" id="result"></div>
+</div>
+
+<script>
+function calculatePerimeter() {
+    const length = parseFloat(document.getElementById('length').value);
+    const breadth = parseFloat(document.getElementById('breadth').value);
+    const resultDiv = document.getElementById('result');
+
+    if (isNaN(length) || isNaN(breadth) || length <= 0 || breadth <= 0) {
+        resultDiv.innerHTML = "Please enter valid positive numbers!";
+        resultDiv.style.color = "red";
+        resultDiv.classList.add('show');
+        return;
+    }
+
+    const perimeter = 2 * (length + breadth);
+    resultDiv.style.color = "green";
+    resultDiv.innerHTML = `Perimeter: ${perimeter}`;
+    resultDiv.classList.add('show');
+}
+
+function clearFields() {
+    document.getElementById('length').value = '';
+    document.getElementById('breadth').value = '';
+    const resultDiv = document.getElementById('result');
+    resultDiv.innerHTML = '';
+    resultDiv.classList.remove('show');
+}
+</script>
+
+</body>
+</html>
